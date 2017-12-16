@@ -1,5 +1,6 @@
 package com.example.langt.myapplication;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity{
         //gold-mood-level-xp
         String data = gold + "@" + mood + "@" + level + "@" + xp + "@" + dayOfYear; //How data is formatted, useful for reading later
         try {
-            FileOutputStream fOut = openFileOutput("data", MODE_WORLD_READABLE); //open stream to file "data"
+            FileOutputStream fOut = openFileOutput("data.txt", Context.MODE_PRIVATE); //open stream to file "data"
             fOut.write(data.getBytes());    //write the string 'data' to data.txt (must convert string to bytes)
             fOut.close();   //close dat boi!
         }
@@ -60,11 +61,11 @@ public class MainActivity extends AppCompatActivity{
         String collected = ""; //will later equal the entire data
         FileInputStream fis = null; //will declare later
         try {
-            fis = openFileInput("data"); //instantiate the stream that lets us read the file
+            fis = openFileInput("data.txt"); //instantiate the stream that lets us read the file
             byte[] dataArray = new byte[fis.available()]; //creates an array that's size is the size of the data (bytes)
             if(dataArray.length == 0) { //if there is no data, we set all values to base values
-                gold = 500;
-                mood = 50;
+                gold = 0;
+                mood = 20;
                 level = 0;
                 xp = 0;
                 dayOfYear = date.get(Calendar.DAY_OF_YEAR);
@@ -86,8 +87,8 @@ public class MainActivity extends AppCompatActivity{
 
         } catch (FileNotFoundException e) { //file not found so we set base values to the instance variables
             e.printStackTrace();
-            gold = 500;
-            mood = 50;
+            gold = 0;
+            mood = 20;
             level = 0;
             xp = 0;
             dayOfYear = date.get(Calendar.DAY_OF_YEAR);
@@ -125,9 +126,11 @@ public class MainActivity extends AppCompatActivity{
             }, 5000);
             adjustmood(10);
         }
+        exportData();
     }
     public void adjustmood(int a) {
         mood += a;
+        exportData();
         System.out.println(mood);
         whichCat();
     }
@@ -162,7 +165,7 @@ public class MainActivity extends AppCompatActivity{
     public void addGold()
     {
         gold++;
+        exportData();
         updateGoldDisplay();
     }
-
 }
