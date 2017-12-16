@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
@@ -11,6 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
 import java.io.PrintWriter;
 
@@ -21,12 +23,30 @@ public class MainActivity extends AppCompatActivity {
     int mood;
     int level;
     int xp;
+    Button foodbtn;
+    InputStream fin;
+    String data = "data.txt";
+    ImageView neutral;
+    ImageView sad;
+    ImageView happy;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         startUp();
+        foodbtn = findViewById(R.id.button);
+        neutral = findViewById(R.id.Neutral);
+        happy = findViewById(R.id.Happy);
+        sad = findViewById(R.id.Sad);
+        if(mood > 20 && mood < 80)
+            neutral.setVisibility(View.VISIBLE);
+        else if(mood >= 80)
+            happy.setVisibility(View.VISIBLE);
+        else if(mood <= 20)
+            sad.setVisibility(View.VISIBLE);
+
     }
+
 
     private TextView textOut; //used for adjusting the textbox output
 
