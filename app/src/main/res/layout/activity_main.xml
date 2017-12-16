@@ -42,11 +42,14 @@
             tools:layout_editor_absoluteY="211dp" />
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:src="@drawable/foodbowl"
-            android:visibility="gone"
+            android:id="@+id/food"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignBottom="@+id/dead"
+            android:layout_toEndOf="@+id/toggleButton2"
+            android:layout_toRightOf="@+id/toggleButton2"
+            android:src="@drawable/bowl"
+            android:visibility="invisible"
             tools:layout_editor_absoluteX="232dp"
             tools:layout_editor_absoluteY="258dp" />
 
@@ -137,8 +140,9 @@
             android:layout_width="200dp"
             android:layout_height="300dp"
             android:layout_alignBottom="@+id/toggleButton2"
-            android:layout_alignLeft="@+id/Neutral"
-            android:layout_alignStart="@+id/Neutral"
+            android:layout_alignLeft="@+id/Happy"
+            android:layout_alignStart="@+id/Happy"
+            android:layout_marginBottom="19dp"
             android:visibility="invisible"
             app:srcCompat="@drawable/dead" />
 

@@ -10,6 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     int gold;
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView sad;
     ImageView happy;
     ImageView dead;
+    ImageView food;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         exportData();
         startUp();
         whichCat();
+        food = findViewById(R.id.food);
 //        setMood();
     }
 
@@ -107,6 +111,14 @@ public class MainActivity extends AppCompatActivity {
         if(gold >= 50) {
             gold -= 50;
             updateGoldDisplay();
+            food.setVisibility(View.VISIBLE);
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    food.setVisibility(View.INVISIBLE);
+                }
+            }, 0, 500);
+
             adjustmood(10);
         }
     }
