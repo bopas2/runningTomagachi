@@ -16,7 +16,7 @@ import android.os.Handler;
 
 
 public class MainActivity extends AppCompatActivity{
-    int gold;
+    static int gold;
     int mood;
     int level;
     int xp;
@@ -159,4 +159,10 @@ public class MainActivity extends AppCompatActivity{
                 adjustmood(-((365 - lastDay) + dayOfYear) * 5);
         }
     }
+
+    public static void addGold()
+    {
+        gold++;
+    }
+
 }

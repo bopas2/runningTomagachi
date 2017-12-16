@@ -41,6 +41,8 @@ public class YourService extends Service implements StepListener{
         }
         stepCount++;
         lastTime = currTime;
+        if(stepCount % 100 == 0)
+            MainActivity.addGold();
     }
 
     public static int getSteps()
