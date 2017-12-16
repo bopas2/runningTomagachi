@@ -10,7 +10,6 @@ import java.util.stream.Stream;
 
 public class MainActivity extends AppCompatActivity {
 
-
     int gold;
     int mood;
     int level;
