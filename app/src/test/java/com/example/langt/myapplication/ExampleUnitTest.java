@@ -1,4 +1,4 @@
-package com.example.langt.runningtomagachi;
+package com.example.langt.myapplication;
 
 import org.junit.Test;
 

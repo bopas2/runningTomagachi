@@ -1,4 +1,4 @@
-package com.example.langt.runningtomagachi;
+package com.example.langt.myapplication;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.langt.runningtomagachi", appContext.getPackageName());
+        assertEquals("com.example.langt.myapplication", appContext.getPackageName());
     }
 }
