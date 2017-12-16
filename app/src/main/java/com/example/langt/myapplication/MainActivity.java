@@ -10,8 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Timer;
-import java.util.TimerTask;
+import android.os.Handler;
+
 
 public class MainActivity extends AppCompatActivity implements StepListener {
     int gold;
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements StepListener {
     int xp;
     int dayOfYear;
     int lastDay;
-    public int stepCount = 0;
+    int stepCount = 0;
     Calendar date = Calendar.getInstance();
     ImageView neutral;
     ImageView sad;
@@ -113,13 +113,13 @@ public class MainActivity extends AppCompatActivity implements StepListener {
             gold -= 50;
             updateGoldDisplay();
             food.setVisibility(View.VISIBLE);
-            new Timer().schedule(new TimerTask() {
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     food.setVisibility(View.INVISIBLE);
                 }
-            }, 0, 500);
-
+            }, 5000);
             adjustmood(10);
         }
     }
