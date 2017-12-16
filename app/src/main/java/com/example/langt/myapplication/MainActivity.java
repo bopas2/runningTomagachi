@@ -92,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        textOut = (TextView) findViewById(R.id.textView2);
-        textOut.setText(gold + "/" + mood + "/" + level + "/" + xp + "/" + dayOfYear); //currently being used to test what appears and what doesn't
+//        textOut = (TextView) findViewById(R.id.textView2);
+//        textOut.setText(gold + "/" + mood + "/" + level + "/" + xp + "/" + dayOfYear); //currently being used to test what appears and what doesn't
     }
     public void buyFood() {
         if(gold > 50) {
