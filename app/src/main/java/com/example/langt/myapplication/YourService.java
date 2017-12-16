@@ -15,6 +15,8 @@ public class YourService extends Service implements StepListener{
 
     TimeZone tz = TimeZone.getTimeZone("EST");
     Calendar reset = Calendar.getInstance(tz);
+    long lastTime;
+    long currTime;
     int stepCount = 0;
     @Nullable
     @Override
@@ -29,6 +31,15 @@ public class YourService extends Service implements StepListener{
 
     @Override
     public void step() {
+        if(stepCount ==0)
+            lastTime = currTime = reset.getTimeInMillis();
+        else
+        {
+            currTime = reset.getTimeInMillis();
+            if(currTime < lastTime)
+                stepCount = 0;
+        }
         stepCount++;
+        lastTime = currTime;
     }
 }
