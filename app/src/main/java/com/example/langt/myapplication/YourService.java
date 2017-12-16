@@ -17,7 +17,7 @@ public class YourService extends Service implements StepListener{
     Calendar reset = Calendar.getInstance(tz);
     long lastTime;
     long currTime;
-    int stepCount = 0;
+    static int stepCount = 0;
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -41,5 +41,10 @@ public class YourService extends Service implements StepListener{
         }
         stepCount++;
         lastTime = currTime;
+    }
+
+    public static int getSteps()
+    {
+        return stepCount;
     }
 }
