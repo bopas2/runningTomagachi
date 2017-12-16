@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.io.FileInputStream;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        gold = 500; mood = -10; dayOfYear = 0;
         startService(new Intent(this, YourService.class));
         gold = 500; mood = 10; dayOfYear = 0;
         exportData();
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity{
     //exports data to the text file
     public void exportData() {
         //gold-mood-level-xp
-        String data = gold + "-" + mood + "-" + level + "-" + xp + "-" + dayOfYear; //How data is formatted, useful for reading later
+        String data = gold + "@" + mood + "@" + level + "@" + xp + "@" + dayOfYear; //How data is formatted, useful for reading later
         try {
             FileOutputStream fOut = openFileOutput("data", MODE_WORLD_READABLE); //open stream to file "data"
             fOut.write(data.getBytes());    //write the string 'data' to data.txt (must convert string to bytes)
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity{
                     collected = new String(dataArray); //gets all the bytes into one string
                 }
                 //at this point collected == 'gold-mood-level-xp' format, we break it up and set our instance variables to their values
-                String[] parts = collected.split("-");
+                String[] parts = collected.split("@");
                 System.out.println(collected);
                 gold = Integer.parseInt(parts[0]);
                 mood = Integer.parseInt(parts[1]);
