@@ -1,5 +1,6 @@
 package com.example.langt.myapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +15,7 @@ import java.util.Calendar;
 import android.os.Handler;
 
 
-public class MainActivity extends AppCompatActivity implements StepListener {
+public class MainActivity extends AppCompatActivity{
     int gold;
     int mood;
     int level;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements StepListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         gold = 500; mood = -10; dayOfYear = 0;
+        startService(new Intent(this, YourService.class));
+        gold = 500; mood = 10; dayOfYear = 0;
         exportData();
         startUp();
         whichCat();
@@ -105,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements StepListener {
     }
     private TextView textOut;
     public void updateGoldDisplay() {
-        textOut = (TextView) findViewById(R.id.goldDisplay);
+        textOut = findViewById(R.id.goldDisplay);
         textOut.setText("Gold: " + gold + "");
     }
 
@@ -155,10 +158,5 @@ public class MainActivity extends AppCompatActivity implements StepListener {
             else if (dayOfYear < lastDay)
                 adjustmood(-((365 - lastDay) + dayOfYear) * 5);
         }
-    }
-
-    @Override
-    public void step() {
-        stepCount++;
     }
 }
