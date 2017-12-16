@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        gold = 500; mood = 10;
+        gold = 500; mood = 10; dayOfYear = 0;
         exportData();
         startUp();
         whichCat();
