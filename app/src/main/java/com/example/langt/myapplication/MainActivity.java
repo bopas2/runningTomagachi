@@ -13,13 +13,14 @@ import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements StepListener {
     int gold;
     int mood;
     int level;
     int xp;
     int dayOfYear;
     int lastDay;
+    public int stepCount = 0;
     Calendar date = Calendar.getInstance();
     ImageView neutral;
     ImageView sad;
@@ -155,4 +156,8 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void step() {
+        stepCount++;
+    }
 }
