@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView neutral;
     ImageView sad;
     ImageView happy;
+    ImageView dead;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,10 +119,13 @@ public class MainActivity extends AppCompatActivity {
         neutral = findViewById(R.id.Neutral); neutral.setVisibility(View.INVISIBLE);
         happy = findViewById(R.id.Happy); happy.setVisibility(View.INVISIBLE);
         sad = findViewById(R.id.Sad); sad.setVisibility(View.INVISIBLE);
+        dead = findViewById(R.id.dead); dead.setVisibility(View.INVISIBLE);
         if(mood > 20 && mood < 80)
             neutral.setVisibility(View.VISIBLE);
         else if(mood >= 80)
             happy.setVisibility(View.VISIBLE);
+        else if (mood < 1)
+            dead.setVisibility(View.VISIBLE);
         else if(mood <= 20)
             sad.setVisibility(View.VISIBLE);
     }

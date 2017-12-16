@@ -132,6 +132,16 @@
             android:background="@drawable/catfood"
             android:onClick="buyFood" />
 
+        <ImageView
+            android:id="@+id/dead"
+            android:layout_width="200dp"
+            android:layout_height="300dp"
+            android:layout_alignBottom="@+id/toggleButton2"
+            android:layout_alignLeft="@+id/Neutral"
+            android:layout_alignStart="@+id/Neutral"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/dead" />
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
