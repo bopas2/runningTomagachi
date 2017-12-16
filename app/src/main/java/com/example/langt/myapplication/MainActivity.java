@@ -26,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        gold = 500;
+        gold = 500; mood = 10;
         exportData();
         startUp();
         whichCat();
-        setMood();
+//        setMood();
     }
 
     //exports data to the text file
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        System.out.println(gold);
+        System.out.println(mood);
         updateGoldDisplay();
     }
     private TextView textOut;
@@ -103,11 +103,12 @@ public class MainActivity extends AppCompatActivity {
         if(gold >= 50) {
             gold -= 50;
             updateGoldDisplay();
-            adjustmood(50);
+            adjustmood(10);
         }
     }
     public void adjustmood(int a) {
         mood += a;
+        System.out.println(mood);
         whichCat();
     }
     public void whichCat() {
@@ -125,11 +126,10 @@ public class MainActivity extends AppCompatActivity {
     public void setMood()
     {
         dayOfYear = date.get(Calendar.DAY_OF_YEAR);
-
         if(dayOfYear - lastDay > 0)
-            mood -= (dayOfYear - lastDay)*5;
+            adjustmood(-(dayOfYear - lastDay)*5);
         else if(dayOfYear < lastDay)
-            mood -= ((365 - lastDay) + dayOfYear)*5;
+            adjustmood(-((365 - lastDay) + dayOfYear)*5);
     }
 
 }
