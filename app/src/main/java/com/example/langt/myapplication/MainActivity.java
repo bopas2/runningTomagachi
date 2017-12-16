@@ -1,5 +1,6 @@
 package com.example.langt.myapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -27,8 +28,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         startUp();
+        startService(new Intent(this, YourService.class));
         whichCat();
-        setMood();
+        Date();
     }
 
 
@@ -55,11 +57,7 @@ public class MainActivity extends AppCompatActivity {
             fis = openFileInput("data"); //instantiate the stream that lets us read the file
             byte[] dataArray = new byte[fis.available()]; //creates an array that's size is the size of the data (bytes)
             if(dataArray.length == 0) { //if there is no data, we set all values to base values
-                gold = 0;
-                mood = 100;
-                level = 0;
-                xp = 0;
-                dayOfYear = date.get(Calendar.DAY_OF_YEAR);
+                firstRun(true);
             }
             else {
                 while(fis.read(dataArray) != -1) {
@@ -77,10 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         } catch (FileNotFoundException e) { //file not found so we set base values to the instance variables
             e.printStackTrace();
-            gold = 0;
-            mood = 100;
-            level = 0;
-            xp = 0;
+            firstRun(true);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -95,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         textOut = (TextView) findViewById(R.id.textView2);
         textOut.setText(gold + "/" + mood + "/" + level + "/" + xp + "/" + dayOfYear); //currently being used to test what appears and what doesn't
     }
-    public void buyFood() {
+    public void buyFood(View v) {
         if(gold > 50) {
             gold -= 50;
             adjustmood(50);
@@ -117,14 +112,27 @@ public class MainActivity extends AppCompatActivity {
             sad.setVisibility(View.VISIBLE);
     }
 
-    public void setMood()
+    public void Date()
     {
         dayOfYear = date.get(Calendar.DAY_OF_YEAR);
 
         if(dayOfYear - lastDay > 0)
-            mood -= (dayOfYear - lastDay)*5;
+            adjustmood(-(dayOfYear - lastDay)*5);
         else if(dayOfYear < lastDay)
-            mood -= ((365 - lastDay) + dayOfYear)*5;
+            adjustmood(-((365 - lastDay) + dayOfYear)*5);
+    }
+
+    public void firstRun(boolean start)
+    {
+        if(start == true)
+        {
+            mood = 100;
+            xp = 0;
+            gold = 0;
+            level = 0;
+            dayOfYear = Calendar.DAY_OF_YEAR;
+        }
+        else {}
     }
 
 }
