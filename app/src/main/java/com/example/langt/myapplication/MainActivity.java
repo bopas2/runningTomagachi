@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         startUp();
         whichCat();
+        setMood();
         foodbtn = findViewById(R.id.button);
     }
 
