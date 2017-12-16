@@ -8,6 +8,7 @@
     tools:context="com.example.langt.runningtomagachi.MainActivity"
     tools:showIn="@layout/activity_main">
 
+<<<<<<< HEAD
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,4 +33,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+=======
+>>>>>>> 6076664f93e771f3718e8cbc532c96fc00fcb261
 </android.support.constraint.ConstraintLayout>
