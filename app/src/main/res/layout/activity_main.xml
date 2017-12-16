@@ -6,24 +6,35 @@
     android:layout_height="match_parent"
     tools:context="com.example.langt.myapplication.MainActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"/>
+
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="109dp"
+        android:layout_height="110dp"
+        android:background="@drawable/foodbag"
         android:onClick="buyFood()"
-        android:text="buy food"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="199dp" />
+        tools:layout_editor_absoluteY="122dp" />
 
     <ToggleButton
         android:id="@+id/toggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="18dp"
+        android:layout_marginEnd="142dp"
+        android:layout_marginStart="142dp"
+        android:layout_marginTop="326dp"
         android:text="ToggleButton"
         android:textOff="Start Run"
         android:textOn="End Run"
-        tools:layout_editor_absoluteX="142dp"
-        tools:layout_editor_absoluteY="371dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar6" />
 
     <TextView
         android:id="@+id/textView"
@@ -46,8 +57,13 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="349dp"
         android:layout_height="39dp"
-        tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="456dp" />
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginStart="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/textView3"
@@ -78,7 +94,22 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="96dp"
         android:layout_height="16dp"
-        tools:layout_editor_absoluteX="98dp"
-        tools:layout_editor_absoluteY="29dp" />
+        android:layout_marginBottom="77dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="29dp"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="91dp"
+        android:layout_height="179dp"
+        android:src="@drawable/foodbowl"
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="232dp"
+        tools:layout_editor_absoluteY="258dp" />
 
 </android.support.constraint.ConstraintLayout>
