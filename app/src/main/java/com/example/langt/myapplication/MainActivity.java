@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 level = 0;
                 xp = 0;
                 dayOfYear = date.get(Calendar.DAY_OF_YEAR);
+                lastDay = dayOfYear;
             }
             else {
                 while(fis.read(dataArray) != -1) {
@@ -80,6 +81,8 @@ public class MainActivity extends AppCompatActivity {
             mood = 100;
             level = 0;
             xp = 0;
+            dayOfYear = date.get(Calendar.DAY_OF_YEAR);
+            lastDay = dayOfYear;
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -125,11 +128,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void setMood()
     {
-        dayOfYear = date.get(Calendar.DAY_OF_YEAR);
-        if(dayOfYear - lastDay > 0)
-            adjustmood(-(dayOfYear - lastDay)*5);
-        else if(dayOfYear < lastDay)
-            adjustmood(-((365 - lastDay) + dayOfYear)*5);
+        if(dayOfYear == 0)
+            lastDay = Calendar.DAY_OF_YEAR;
+        else {
+            dayOfYear = date.get(Calendar.DAY_OF_YEAR);
+            if (dayOfYear - lastDay > 0)
+                adjustmood(-(dayOfYear - lastDay) * 5);
+            else if (dayOfYear < lastDay)
+                adjustmood(-((365 - lastDay) + dayOfYear) * 5);
+        }
     }
 
 }
