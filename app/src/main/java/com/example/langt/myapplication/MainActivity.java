@@ -127,9 +127,9 @@ public class MainActivity extends AppCompatActivity {
         dayOfYear = date.get(Calendar.DAY_OF_YEAR);
 
         if(dayOfYear - lastDay > 0)
-            mood -= (dayOfYear - lastDay)*5;
+            adjustmood(-(dayOfYear - lastDay)*5);
         else if(dayOfYear < lastDay)
-            mood -= ((365 - lastDay) + dayOfYear)*5;
+            adjustmood(-((365 - lastDay) + dayOfYear)*5);
     }
 
 }
