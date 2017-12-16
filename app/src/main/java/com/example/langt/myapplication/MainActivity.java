@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity{
     }
     private TextView textOut;
     public void updateGoldDisplay() {
-        textOut = (TextView) findViewById(R.id.goldDisplay);
+        textOut = findViewById(R.id.goldDisplay);
         textOut.setText("Gold: " + gold + "");
     }
 
