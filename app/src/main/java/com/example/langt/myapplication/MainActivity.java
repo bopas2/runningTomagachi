@@ -10,12 +10,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     int gold;
     int mood;
     int level;
     int xp;
+    int dayOfYear;
+    int lastDay;
+    Calendar date = Calendar.getInstance();
     Button foodbtn;
     ImageView neutral;
     ImageView sad;
@@ -35,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     //exports data to the text file
     public void exportData() {
         //gold-mood-level-xp
-        String data = gold + "-" + mood + "-" + level + "-" + "xp"; //How data is formatted, useful for reading later
+        String data = gold + "-" + mood + "-" + level + "-" + xp + dayOfYear; //How data is formatted, useful for reading later
         try {
             FileOutputStream fOut = openFileOutput("data", MODE_WORLD_READABLE); //open stream to file "data"
             fOut.write(data.getBytes());    //write the string 'data' to data.txt (must convert string to bytes)
@@ -57,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 mood = 100;
                 level = 0;
                 xp = 0;
+                dayOfYear = date.get(Calendar.DAY_OF_YEAR);
             }
             else {
                 while(fis.read(dataArray) != -1) {
@@ -68,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 mood = Integer.parseInt(parts[1]);
                 level = Integer.parseInt(parts[2]);
                 xp = Integer.parseInt(parts[3]);
+                lastDay = Integer.parseInt((parts[4]));
             }
 
         } catch (FileNotFoundException e) { //file not found so we set base values to the instance variables
@@ -110,6 +116,16 @@ public class MainActivity extends AppCompatActivity {
             happy.setVisibility(View.VISIBLE);
         else if(mood <= 20)
             sad.setVisibility(View.VISIBLE);
+    }
+
+    public void setMood()
+    {
+        dayOfYear = date.get(Calendar.DAY_OF_YEAR);
+
+        if(dayOfYear - lastDay > 0)
+            mood -= (dayOfYear - lastDay)*5;
+        else if(dayOfYear < lastDay)
+            mood -= ((365 - lastDay) + dayOfYear)*5;
     }
 
 }
