@@ -53,7 +53,7 @@
         android:id="@+id/button"
         android:layout_width="109dp"
         android:layout_height="110dp"
-        android:background="@drawable/foodbag"
+        android:background="@drawable/bagfood"
         android:onClick="buyFood()"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="122dp" />

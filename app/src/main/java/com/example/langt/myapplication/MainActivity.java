@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     //exports data to the text file
     public void exportData() {
         //gold-mood-level-xp
-        String data = gold + "-" + mood + "-" + level + "-" + xp + dayOfYear; //How data is formatted, useful for reading later
+        String data = gold + "-" + mood + "-" + level + "-" + xp + "-" + dayOfYear; //How data is formatted, useful for reading later
         try {
             FileOutputStream fOut = openFileOutput("data", MODE_WORLD_READABLE); //open stream to file "data"
             fOut.write(data.getBytes());    //write the string 'data' to data.txt (must convert string to bytes)
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         textOut = (TextView) findViewById(R.id.textView2);
-        textOut.setText(gold + "/" + mood + "/" + level + "/" + xp); //currently being used to test what appears and what doesn't
+        textOut.setText(gold + "/" + mood + "/" + level + "/" + xp + "/" + dayOfYear); //currently being used to test what appears and what doesn't
     }
     public void buyFood() {
         if(gold > 50) {
