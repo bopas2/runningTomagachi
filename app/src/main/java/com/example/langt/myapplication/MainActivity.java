@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.io.*;
 import java.util.stream.Stream;
@@ -11,18 +12,30 @@ import java.util.stream.Stream;
 public class MainActivity extends AppCompatActivity {
 
     int gold;
-    int mood;
+    int mood = 100;
     int level;
     int xp;
     Button foodbtn;
     InputStream fin;
     String data = "data.txt";
+    ImageView neutral;
+    ImageView sad;
+    ImageView happy;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         startUp();
         foodbtn = findViewById(R.id.button);
+        neutral = findViewById(R.id.Neutral);
+        happy = findViewById(R.id.Happy);
+        sad = findViewById(R.id.Sad);
+        if(mood > 20 && mood < 80)
+            neutral.setVisibility(View.VISIBLE);
+        else if(mood >= 80)
+            happy.setVisibility(View.VISIBLE);
+        else if(mood <= 20)
+            sad.setVisibility(View.VISIBLE);
 
     }
 

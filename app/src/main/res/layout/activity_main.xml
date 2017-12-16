@@ -9,7 +9,45 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"/>
+        android:background="@drawable/background"
+        tools:layout_editor_absoluteX="47dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <ToggleButton
+            android:id="@+id/toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="91dp"
+            android:layout_marginRight="91dp"
+            android:layout_marginTop="120dp"
+            android:checked="false"
+            android:text="ToggleButton"
+            android:textOff="Start Run"
+            android:textOn="End Run"
+            app:layout_constraintBottom_toTopOf="@+id/textView3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressBar6"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ImageView
+            android:id="@+id/Sad"
+            android:layout_width="200dip"
+            android:layout_height="200dip"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/toggleButton"
+            android:layout_marginEnd="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="85dp"
+            android:cropToPadding="true"
+            android:src="@drawable/sad"
+            android:visibility="gone" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/button"
@@ -19,23 +57,6 @@
         android:onClick="buyFood()"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="122dp" />
-
-    <ToggleButton
-        android:id="@+id/toggleButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="18dp"
-        android:layout_marginEnd="142dp"
-        android:layout_marginStart="142dp"
-        android:layout_marginTop="326dp"
-        android:checked="false"
-        android:text="ToggleButton"
-        android:textOff="Start Run"
-        android:textOn="End Run"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar6" />
 
     <TextView
         android:id="@+id/textView"
@@ -59,7 +80,7 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="349dp"
         android:layout_height="39dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="15dp"
         android:layout_marginEnd="17dp"
         android:layout_marginStart="18dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,7 +94,7 @@
         android:layout_height="wrap_content"
         android:text="Mood:"
         tools:layout_editor_absoluteX="172dp"
-        tools:layout_editor_absoluteY="437dp" />
+        tools:layout_editor_absoluteY="397dp" />
 
     <TextView
         android:id="@+id/textView4"
@@ -113,5 +134,27 @@
         android:visibility="gone"
         tools:layout_editor_absoluteX="232dp"
         tools:layout_editor_absoluteY="258dp" />
+
+    <ImageView
+        android:id="@+id/Neutral"
+        android:layout_width="200dip"
+        android:layout_height="200dip"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/neutral"
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="168dp"
+        tools:layout_editor_absoluteY="223dp" />
+
+    <ImageView
+        android:id="@+id/Happy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:cropToPadding="true"
+        android:src="@drawable/happy"
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="208dp" />
 
 </android.support.constraint.ConstraintLayout>
