@@ -16,7 +16,7 @@ import android.os.Handler;
 
 
 public class MainActivity extends AppCompatActivity{
-    static int gold;
+    int gold;
     int mood;
     int level;
     int xp;
@@ -160,9 +160,10 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    public static void addGold()
+    public void addGold()
     {
         gold++;
+        updateGoldDisplay();
     }
 
 }

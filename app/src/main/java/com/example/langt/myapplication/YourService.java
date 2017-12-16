@@ -12,7 +12,7 @@ import android.support.annotation.Nullable;
  */
 //Pedometer
 public class YourService extends Service implements StepListener{
-
+    MainActivity mainActivity;
     TimeZone tz = TimeZone.getTimeZone("EST");
     Calendar reset = Calendar.getInstance(tz);
     long lastTime;
@@ -26,6 +26,7 @@ public class YourService extends Service implements StepListener{
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // do your jobs here
+        mainActivity = new MainActivity();
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -42,7 +43,7 @@ public class YourService extends Service implements StepListener{
         stepCount++;
         lastTime = currTime;
         if(stepCount % 100 == 0)
-            MainActivity.addGold();
+            mainActivity.addGold();
     }
 
     public static int getSteps()
