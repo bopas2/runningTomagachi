@@ -26,13 +26,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        gold = 500;
+        exportData();
         startUp();
         whichCat();
         setMood();
     }
-
-
-    private TextView textOut; //used for adjusting the textbox output
 
     //exports data to the text file
     public void exportData() {
@@ -91,13 +90,19 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
-//        textOut = (TextView) findViewById(R.id.textView2);
-//        textOut.setText(gold + "/" + mood + "/" + level + "/" + xp + "/" + dayOfYear); //currently being used to test what appears and what doesn't
+        System.out.println(gold);
+        updateGoldDisplay();
     }
-    public void buyFood() {
-        if(gold > 50) {
+    private TextView textOut;
+    public void updateGoldDisplay() {
+        textOut = (TextView) findViewById(R.id.goldDisplay);
+        textOut.setText("Gold: " + gold + "");
+    }
+
+    public void buyFood(View v) {
+        if(gold >= 50) {
             gold -= 50;
+            updateGoldDisplay();
             adjustmood(50);
         }
     }
