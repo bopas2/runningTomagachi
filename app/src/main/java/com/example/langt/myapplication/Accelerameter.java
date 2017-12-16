@@ -6,4 +6,6 @@ import android.hardware.*;
  */
 
 public class Accelerameter {
+    SensorManager sensorManager;
+    sensorManager =
 }

@@ -5,9 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import java.io.File;
-import java.util.Scanner;
-import java.io.PrintWriter;
+import java.io.*;
+import java.util.stream.Stream;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
     int level;
     int xp;
     Button foodbtn;
+    InputStream fin;
+    String data = "data.txt";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +35,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void startUp() {
-
-        gold = fileReader.nextInt();
-        mood = fileReader.nextInt();
-        level = fileReader.nextInt();
-        xp = fileReader.nextInt();
-
+        File file = new File(getApplicationContext().getFilesDir() + File.separator +  data);
+        if (!file.exists()) {
+            file.mkdir();
+        }
+        fin = new FileInputStream(data);
+        InputStreamReader isr = new InputStreamReader(fin);
     }
     public static void buyFood()
     {
