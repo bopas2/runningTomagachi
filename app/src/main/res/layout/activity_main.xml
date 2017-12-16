@@ -28,6 +28,7 @@
         android:layout_marginEnd="142dp"
         android:layout_marginStart="142dp"
         android:layout_marginTop="326dp"
+        android:checked="false"
         android:text="ToggleButton"
         android:textOff="Start Run"
         android:textOn="End Run"
@@ -49,6 +50,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Gold:"
+        android:visibility="visible"
         tools:layout_editor_absoluteX="290dp"
         tools:layout_editor_absoluteY="29dp" />
 
