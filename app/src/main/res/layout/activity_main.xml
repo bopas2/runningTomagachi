@@ -136,10 +136,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/Neutral"
+            android:layout_alignLeft="@+id/button5"
+            android:layout_alignStart="@+id/button5"
             android:layout_marginBottom="8dp"
-            android:layout_toEndOf="@+id/textView2"
-            android:layout_toRightOf="@+id/textView2"
-            android:text="Feed Me!" />
+            android:text="Feed me! (costs 50 gold)" />
 
     </RelativeLayout>
 
