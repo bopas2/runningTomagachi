@@ -10,7 +10,7 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
+        android:background="@drawable/background2"
         android:fitsSystemWindows="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -139,12 +139,11 @@
             android:id="@+id/dead"
             android:layout_width="200dp"
             android:layout_height="300dp"
-            android:layout_alignBottom="@+id/toggleButton2"
-            android:layout_alignLeft="@+id/Happy"
-            android:layout_alignStart="@+id/Happy"
-            android:layout_marginBottom="19dp"
+            android:layout_above="@+id/toggleButton2"
+            android:layout_toLeftOf="@+id/goldDisplay"
+            android:layout_toStartOf="@+id/goldDisplay"
             android:visibility="invisible"
-            app:srcCompat="@drawable/dead" />
+            app:srcCompat="@drawable/deadcat" />
 
     </RelativeLayout>
 
