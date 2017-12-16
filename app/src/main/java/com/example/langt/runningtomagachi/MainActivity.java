@@ -10,7 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
-
+    public int coins = 0;
+    public int happy = 100;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        
     }
 
     @Override
@@ -48,5 +51,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void Feed(View v)
+    {
+        coins -= 1;
+        if(happy <= 80)
+            happy += 20;
+        else
+            happy = 100;
     }
 }
