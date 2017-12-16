@@ -3,7 +3,6 @@ package com.example.langt.myapplication;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.io.FileInputStream;
@@ -20,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     int dayOfYear;
     int lastDay;
     Calendar date = Calendar.getInstance();
-    Button foodbtn;
     ImageView neutral;
     ImageView sad;
     ImageView happy;
@@ -31,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         startUp();
         whichCat();
         setMood();
-        foodbtn = findViewById(R.id.button);
     }
 
 
@@ -70,11 +67,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 //at this point collected == 'gold-mood-level-xp' format, we break it up and set our instance variables to their values
                 String[] parts = collected.split("-");
+                System.out.println(collected);
                 gold = Integer.parseInt(parts[0]);
                 mood = Integer.parseInt(parts[1]);
                 level = Integer.parseInt(parts[2]);
                 xp = Integer.parseInt(parts[3]);
-                lastDay = Integer.parseInt((parts[4]));
+                lastDay = Integer.parseInt(parts[4]);
             }
 
         } catch (FileNotFoundException e) { //file not found so we set base values to the instance variables
