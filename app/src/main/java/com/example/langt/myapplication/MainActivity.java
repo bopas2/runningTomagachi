@@ -29,14 +29,13 @@ public class MainActivity extends AppCompatActivity{
     ImageView happy;
     ImageView dead;
     ImageView food;
+    TextView text;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        gold = 500; mood = -10; dayOfYear = 0;
         startService(new Intent(this, YourService.class));
-        gold = 500; mood = 10; dayOfYear = 0;
-        exportData();
+        text = findViewById(R.id.goldDisplay);
         startUp();
         whichCat();
         food = findViewById(R.id.food);
@@ -64,8 +63,8 @@ public class MainActivity extends AppCompatActivity{
             fis = openFileInput("data"); //instantiate the stream that lets us read the file
             byte[] dataArray = new byte[fis.available()]; //creates an array that's size is the size of the data (bytes)
             if(dataArray.length == 0) { //if there is no data, we set all values to base values
-                gold = 0;
-                mood = 100;
+                gold = 500;
+                mood = 50;
                 level = 0;
                 xp = 0;
                 dayOfYear = date.get(Calendar.DAY_OF_YEAR);
@@ -87,8 +86,8 @@ public class MainActivity extends AppCompatActivity{
 
         } catch (FileNotFoundException e) { //file not found so we set base values to the instance variables
             e.printStackTrace();
-            gold = 0;
-            mood = 100;
+            gold = 500;
+            mood = 50;
             level = 0;
             xp = 0;
             dayOfYear = date.get(Calendar.DAY_OF_YEAR);
@@ -97,7 +96,9 @@ public class MainActivity extends AppCompatActivity{
             e.printStackTrace();
         } finally {
             try {
-                fis.close();
+                if(fis != null) {
+                    fis.close();
+                }
             }
             catch (IOException e) {
                 e.printStackTrace();
@@ -106,10 +107,8 @@ public class MainActivity extends AppCompatActivity{
         System.out.println(mood);
         updateGoldDisplay();
     }
-    private TextView textOut;
     public void updateGoldDisplay() {
-        textOut = findViewById(R.id.goldDisplay);
-        textOut.setText("Gold: " + gold + "");
+        text.setText("Gold: " + gold);
     }
 
     public void buyFood(View v) {
