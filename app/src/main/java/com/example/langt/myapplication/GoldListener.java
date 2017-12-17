@@ -6,6 +6,7 @@ package com.example.langt.myapplication;
 
 public interface GoldListener {
     void goldMail();
+    void allSteps();
 
 
 }

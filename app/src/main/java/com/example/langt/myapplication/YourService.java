@@ -57,6 +57,7 @@ public class YourService extends Service implements StepListener{
         //if(stepCount % 25 == 0)
 
             gold.goldMail();
+            gold.allSteps();
     }
 
     public static int getSteps()

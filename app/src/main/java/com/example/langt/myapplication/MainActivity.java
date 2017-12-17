@@ -26,9 +26,8 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
     int mood;
     int level;
     int xp;
-    int dayOfYear;
-    int lastDay;
     int stepCount = 0;
+    static int allSteps;
     Calendar date = Calendar.getInstance();
     /*ImageView neutral;
     ImageView sad;
@@ -52,15 +51,13 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         whichCat();
         updateProgress();
         food = findViewById(R.id.food);
-
-
         setMood();
     }
 
     //exports data to the text file
     public void exportData() {
         //gold-mood-level-xp
-        String data = gold + "@" + mood + "@" + level + "@" + xp + "@" + dayOfYear; //How data is formatted, useful for reading later
+        String data = gold + "@" + mood + "@" + level + "@" + xp + "@" + stepCount; //How data is formatted, useful for reading later
         try {
             FileOutputStream fOut = openFileOutput("data.txt", Context.MODE_PRIVATE); //open stream to file "data"
             fOut.write(data.getBytes());    //write the string 'data' to data.txt (must convert string to bytes)
@@ -82,8 +79,7 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
                 mood = 20;
                 level = 0;
                 xp = 0;
-                dayOfYear = date.get(Calendar.DAY_OF_YEAR);
-                lastDay = dayOfYear;
+                stepCount = 0;
             }
             else {
                 while(fis.read(dataArray) != -1) {
@@ -96,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
                 mood = Integer.parseInt(parts[1]);
                 level = Integer.parseInt(parts[2]);
                 xp = Integer.parseInt(parts[3]);
-                lastDay = Integer.parseInt(parts[4]);
+                stepCount = Integer.parseInt(parts[4]);
             }
 
         } catch (FileNotFoundException e) { //file not found so we set base values to the instance variables
@@ -105,8 +101,7 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
             mood = 20;
             level = 0;
             xp = 0;
-            dayOfYear = date.get(Calendar.DAY_OF_YEAR);
-            lastDay = dayOfYear;
+            stepCount = 0;
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -204,5 +199,10 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         gold++;
         exportData();
         updateGoldDisplay();
+    }
+
+    public void allSteps(){
+        allSteps++;
+        exportData();
     }
 }
