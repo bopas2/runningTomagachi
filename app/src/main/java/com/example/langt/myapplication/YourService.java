@@ -12,23 +12,35 @@ import android.support.annotation.Nullable;
  */
 //Pedometer
 public class YourService extends Service implements StepListener{
-    MainActivity mainActivity;
     TimeZone tz = TimeZone.getTimeZone("EST");
     Calendar reset = Calendar.getInstance(tz);
     long lastTime;
     long currTime;
+    Accelerameter accel;
     static int stepCount = 0;
+    static GoldListener gold;
+
+    @Override
+    public void onCreate() {
+    }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
     }
+    public static void Register(GoldListener listener){
+        gold = listener;
+    }
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         // do your jobs here
-        mainActivity = new MainActivity();
+        accel = new Accelerameter(getApplicationContext(), this);
+        accel.SetUp();
         return super.onStartCommand(intent, flags, startId);
     }
+
 
     @Override
     public void step() {
@@ -42,8 +54,9 @@ public class YourService extends Service implements StepListener{
         }
         stepCount++;
         lastTime = currTime;
-        if(stepCount % 100 == 0)
-            mainActivity.addGold();
+//        if(stepCount % 100 == 0)
+
+            gold.goldMail();
     }
 
     public static int getSteps()

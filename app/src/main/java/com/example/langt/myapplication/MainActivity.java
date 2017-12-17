@@ -2,6 +2,7 @@ package com.example.langt.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +17,7 @@ import java.util.Calendar;
 import android.os.Handler;
 
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements GoldListener{
     int gold;
     int mood;
     int level;
@@ -35,11 +36,13 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        YourService.Register(this);
         startService(new Intent(this, YourService.class));
         text = findViewById(R.id.goldDisplay);
         startUp();
         whichCat();
         food = findViewById(R.id.food);
+
 //        setMood();
     }
 
@@ -162,7 +165,9 @@ public class MainActivity extends AppCompatActivity{
         }
     }
 
-    public void addGold()
+
+    @Override
+    public void goldMail()
     {
         gold++;
         exportData();
