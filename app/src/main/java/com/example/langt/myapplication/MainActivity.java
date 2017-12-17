@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
     ImageView happy;
     ImageView dead;*/
 
-    ImageButton kitty;
-
     ImageView food;
     ImageButton kitty;
     TextView text;
