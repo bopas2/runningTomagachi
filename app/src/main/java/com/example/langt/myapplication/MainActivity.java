@@ -29,12 +29,13 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
     int dayOfYear;
     int lastDay;
     int stepCount = 0;
+    int i = 0;
     Calendar date = Calendar.getInstance();
     /*ImageView neutral;
     ImageView sad;
     ImageView happy;
     ImageView dead;*/
-
+    Timer ani;
 
     ImageView food;
     ImageButton kitty;
@@ -48,11 +49,11 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         startService(new Intent(this, YourService.class));
         text = findViewById(R.id.goldDisplay);
         startUp();
+        ani = new Timer();
         kitty = findViewById(R.id.cat);
         whichCat();
         updateProgress();
         food = findViewById(R.id.food);
-
 
         setMood();
     }
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
                 //at this point collected == 'gold-mood-level-xp' format, we break it up and set our instance variables to their values
                 String[] parts = collected.split("@");
                 System.out.println(collected);
-                gold = Integer.parseInt(parts[0]);
+                gold = 100;//gold = Integer.parseInt(parts[0]);
                 mood = Integer.parseInt(parts[1]);
                 level = Integer.parseInt(parts[2]);
                 xp = Integer.parseInt(parts[3]);
@@ -130,15 +131,47 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         if(gold >= 10) {
             gold -= 10;
             updateGoldDisplay();
+            food.setImageResource(R.drawable.bowl);
             food.setVisibility(View.VISIBLE);
-            final Handler handler = new Handler();
+            ani.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            food.setImageResource(R.drawable.halffood);
+                        }
+                    });
+                }
+            }, 1000);
+            ani.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            food.setImageResource(R.drawable.emptyfood);
+                        }
+                    });
+                }
+            }, 2000);
+            adjustmood(5);
+
+            /*final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    food.setVisibility(View.INVISIBLE);
+                    food.setImageResource(R.drawable.halffood);
                 }
             }, 1000);
-            adjustmood(5);
+
+            final Handler handler2 = new Handler();
+            handler2.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                        food.setImageResource(R.drawable.emptyfood);
+                }
+            }, 1000);*/
         }
         exportData();
     }

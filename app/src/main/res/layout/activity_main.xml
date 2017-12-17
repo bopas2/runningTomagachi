@@ -48,8 +48,8 @@
             android:layout_alignEnd="@+id/progressBar"
             android:layout_alignRight="@+id/progressBar"
             android:layout_marginBottom="32dp"
-            android:src="@drawable/bowl"
-            android:visibility="invisible"
+            android:src="@drawable/emptyfood"
+            android:visibility="visible"
             tools:layout_editor_absoluteX="232dp"
             tools:layout_editor_absoluteY="258dp" />
 
@@ -167,13 +167,7 @@
             android:backgroundTint="@android:color/transparent"
             android:onClick="pet"
             app:srcCompat="@drawable/neutral" />
-            android:layout_alignBottom="@+id/food"
-            android:layout_alignStart="@+id/button5"
-            android:layout_marginBottom="48dp"
-            android:layout_marginStart="10dp"
-            android:backgroundTint="@android:color/transparent"
-            android:onClick="pet"
-            android:src="@drawable/neutral" />
+
 
     </RelativeLayout>
 

@@ -21,7 +21,7 @@ public class Accelerameter implements SensorEventListener{
 
     }
     public void SetUp(){
-        sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER), SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER), SensorManager.SENSOR_DELAY_FASTEST);
     }
     public void Destroy(){
         sensorManager.unregisterListener(this);
