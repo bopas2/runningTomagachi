@@ -54,7 +54,7 @@ public class YourService extends Service implements StepListener{
         }
         stepCount++;
         lastTime = currTime;
-        if(stepCount % 25 == 0)
+        //if(stepCount % 25 == 0)
 
             gold.goldMail();
     }

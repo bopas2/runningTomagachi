@@ -15,6 +15,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.os.Handler;
 
 
@@ -32,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
     ImageView happy;
     ImageView dead;*/
 
-    ImageButton kitty;
 
     ImageView food;
     ImageButton kitty;
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         food = findViewById(R.id.food);
 
 
-//        setMood();
+        setMood();
     }
 
     //exports data to the text file
@@ -181,15 +183,21 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
 
     public void setMood()
     {
-        if(dayOfYear == 0)
-            lastDay = Calendar.DAY_OF_YEAR;
-        else {
-            dayOfYear = date.get(Calendar.DAY_OF_YEAR);
-            if (dayOfYear - lastDay > 0)
-                adjustmood(-(dayOfYear - lastDay) * 5);
-            else if (dayOfYear < lastDay)
-                adjustmood(-((365 - lastDay) + dayOfYear) * 5);
-        }
+        Timer time = new Timer();
+        time.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adjustmood(-1);
+                        exportData();
+                        updateProgress();
+                        whichCat();
+                    }
+                });
+            }
+        }, 0, 1000);
     }
     @Override
     public void goldMail() {
