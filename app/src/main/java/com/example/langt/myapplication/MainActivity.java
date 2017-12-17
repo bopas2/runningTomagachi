@@ -6,6 +6,7 @@ import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,11 +27,12 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
     int lastDay;
     int stepCount = 0;
     Calendar date = Calendar.getInstance();
-    ImageView neutral;
+    /*ImageView neutral;
     ImageView sad;
     ImageView happy;
-    ImageView dead;
+    ImageView dead;*/
     ImageView food;
+    ImageButton kitty;
     TextView text;
     ProgressBar pp;
 
@@ -147,18 +149,26 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         pp.setProgress(mood,true);
     }
     public void whichCat() {
-        neutral = findViewById(R.id.Neutral); neutral.setVisibility(View.INVISIBLE);
-        happy = findViewById(R.id.Happy); happy.setVisibility(View.INVISIBLE);
-        sad = findViewById(R.id.Sad); sad.setVisibility(View.INVISIBLE);
-        dead = findViewById(R.id.dead); dead.setVisibility(View.INVISIBLE);
         if(mood > 20 && mood < 80)
-            neutral.setVisibility(View.VISIBLE);
-        else if(mood >= 80)
-            happy.setVisibility(View.VISIBLE);
+            kitty.setImageResource(R.drawable.neutral);
+        else if(mood >= 80 && mood <= 100)
+            kitty.setImageResource(R.drawable.happy);
         else if (mood < 1)
-            dead.setVisibility(View.VISIBLE);
+            kitty.setImageResource(R.drawable.deadcat);
         else if(mood <= 20)
-            sad.setVisibility(View.VISIBLE);
+            kitty.setImageResource(R.drawable.sad);
+    }
+
+    public void pet(View v)
+    {
+        kitty.setImageResource(R.drawable.pet);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                whichCat();
+            }
+        }, 1000);
     }
 
     public void setMood()
