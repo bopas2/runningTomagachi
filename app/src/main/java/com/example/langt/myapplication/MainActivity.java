@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
     ImageView food;
     ImageButton kitty;
     TextView text;
+    TextView textSteps;
+    TextView textLvl;
     ProgressBar pp;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         YourService.Register(this);
         startService(new Intent(this, YourService.class));
         text = findViewById(R.id.goldDisplay);
+        textSteps = findViewById(R.id.textView3);
+        textLvl = findViewById(R.id.textView2);
         startUp();
         kitty = findViewById(R.id.cat);
         whichCat();
@@ -121,6 +125,13 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         text.setText("Gold: " + gold);
     }
 
+    public void updateLevelDisplay() {
+        textLvl.setText("Lvl: " + (int)(.01 * Math.pow(allSteps,.98)));
+    }
+
+    public void updateStepDisplay() {
+        textSteps.setText("Total Steps: " + allSteps);
+    }
     public void buyFood(View v) {
         if(gold >= 10) {
             gold -= 10;
@@ -166,14 +177,16 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
 
     public void pet(View v)
     {
-        kitty.setImageResource(R.drawable.pet);
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                whichCat();
-            }
-        }, 1000);
+        if(mood >= 1) {
+            kitty.setImageResource(R.drawable.pet);
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    whichCat();
+                }
+            }, 1000);
+        }
     }
 
     public void setMood()
@@ -203,6 +216,8 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
 
     public void allSteps(){
         allSteps++;
+        updateStepDisplay();
+        updateLevelDisplay();
         exportData();
     }
 }
