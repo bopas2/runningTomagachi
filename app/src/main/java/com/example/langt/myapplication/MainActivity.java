@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity{
     ImageView dead;
     ImageView food;
     TextView text;
+    ProgressBar pp;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity{
         text = findViewById(R.id.goldDisplay);
         startUp();
         whichCat();
+        updateProgress();
         food = findViewById(R.id.food);
 //        setMood();
     }
@@ -113,8 +115,8 @@ public class MainActivity extends AppCompatActivity{
     }
 
     public void buyFood(View v) {
-        if(gold >= 50) {
-            gold -= 50;
+        if(gold >= 10) {
+            gold -= 10;
             updateGoldDisplay();
             food.setVisibility(View.VISIBLE);
             final Handler handler = new Handler();
@@ -123,16 +125,23 @@ public class MainActivity extends AppCompatActivity{
                 public void run() {
                     food.setVisibility(View.INVISIBLE);
                 }
-            }, 5000);
-            adjustmood(10);
+            }, 1000);
+            adjustmood(5);
         }
         exportData();
     }
+//    //text = findViewById(R.id.goldDisplay);
+
     public void adjustmood(int a) {
         mood += a;
         exportData();
-        System.out.println(mood);
         whichCat();
+        updateProgress();
+    }
+    public void updateProgress() {
+        pp = (ProgressBar)(findViewById(R.id.progressBar));
+        pp.setScaleY(3f);
+        pp.setProgress(mood,true);
     }
     public void whichCat() {
         neutral = findViewById(R.id.Neutral); neutral.setVisibility(View.INVISIBLE);
