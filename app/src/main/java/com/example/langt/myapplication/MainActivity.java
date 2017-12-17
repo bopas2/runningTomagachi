@@ -173,8 +173,6 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
                 adjustmood(-((365 - lastDay) + dayOfYear) * 5);
         }
     }
-
-
     @Override
     public void goldMail()
     {
