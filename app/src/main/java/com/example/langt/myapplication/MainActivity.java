@@ -28,21 +28,14 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
     int gold;
     int mood;
     int level;
-    int xp;
-    int dayOfYear;
-    int lastDay;
     int stepCount = 0;
-    int i = 0;
-    Calendar date = Calendar.getInstance();
-    /*ImageView neutral;
-    ImageView sad;
-    ImageView happy;
-    ImageView dead;*/
     Timer ani;
 
     ImageView food;
     ImageButton kitty;
     TextView text;
+    TextView textSteps;
+    TextView textLvl;
     ProgressBar pp;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,25 +44,30 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         YourService.Register(this);
         startService(new Intent(this, YourService.class));
         text = findViewById(R.id.goldDisplay);
+        textLvl = findViewById(R.id.textView2);
+        textSteps = findViewById(R.id.textView3);
         startUp();
         ani = new Timer();
         kitty = findViewById(R.id.cat);
         whichCat();
         updateProgress();
         food = findViewById(R.id.food);
+<<<<<<< HEAD
         RelativeLayout layout = (RelativeLayout)findViewById(R.id.relativeLayout);
 
         AnimationDrawable anim = (AnimationDrawable) layout.getBackground();
         anim.start();
         //food.setBackgroundTintList(ColorStateList.valueOf(transparent))
 
+=======
+>>>>>>> b96b4ebb08bc3ec071de2c922405f19b315e08c2
         setMood();
     }
 
     //exports data to the text file
     public void exportData() {
-        //gold-mood-level-xp
-        String data = gold + "@" + mood + "@" + level + "@" + xp + "@" + dayOfYear; //How data is formatted, useful for reading later
+        //gold-mood-level-step
+        String data = gold + "@" + mood + "@" + level + "@" + stepCount; //How data is formatted, useful for reading later
         try {
             FileOutputStream fOut = openFileOutput("data.txt", Context.MODE_PRIVATE); //open stream to file "data"
             fOut.write(data.getBytes());    //write the string 'data' to data.txt (must convert string to bytes)
@@ -88,34 +86,29 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
             byte[] dataArray = new byte[fis.available()]; //creates an array that's size is the size of the data (bytes)
             if(dataArray.length == 0) { //if there is no data, we set all values to base values
                 gold = 0;
-                mood = 20;
+                mood = 50;
                 level = 0;
-                xp = 0;
-                dayOfYear = date.get(Calendar.DAY_OF_YEAR);
-                lastDay = dayOfYear;
+                stepCount = 0;
             }
             else {
                 while(fis.read(dataArray) != -1) {
                     collected = new String(dataArray); //gets all the bytes into one string
                 }
                 //at this point collected == 'gold-mood-level-xp' format, we break it up and set our instance variables to their values
-                String[] parts = collected.split("@");
+                String[] parts = collected.split("@"); //gold-mood-level-step
                 System.out.println(collected);
-                gold = 100;//gold = Integer.parseInt(parts[0]);
+                gold = Integer.parseInt(parts[0]);
                 mood = Integer.parseInt(parts[1]);
                 level = Integer.parseInt(parts[2]);
-                xp = Integer.parseInt(parts[3]);
-                lastDay = Integer.parseInt(parts[4]);
+                stepCount = Integer.parseInt(parts[3]);
             }
 
         } catch (FileNotFoundException e) { //file not found so we set base values to the instance variables
             e.printStackTrace();
             gold = 0;
-            mood = 20;
+            mood = 50;
             level = 0;
-            xp = 0;
-            dayOfYear = date.get(Calendar.DAY_OF_YEAR);
-            lastDay = dayOfYear;
+            stepCount = 0;
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -134,7 +127,12 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
     public void updateGoldDisplay() {
         text.setText("Gold: " + gold);
     }
-
+    public void updateStepDisplay() {
+        textSteps.setText("Total Steps: " + stepCount);
+    }
+    public void updateLvlDisplay() {
+        textLvl.setText("Level: " + (int)((Math.pow(stepCount,.98))/100));
+    }
     public void buyFood(View v) {
         if(gold >= 10) {
             gold -= 10;
@@ -164,22 +162,6 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
                 }
             }, 2000);
             adjustmood(5);
-
-            /*final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    food.setImageResource(R.drawable.halffood);
-                }
-            }, 1000);
-
-            final Handler handler2 = new Handler();
-            handler2.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                        food.setImageResource(R.drawable.emptyfood);
-                }
-            }, 1000);*/
         }
         exportData();
     }
@@ -245,10 +227,14 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         gold++;
         exportData();
         updateGoldDisplay();
+
     }
 
     @Override
     public void allSteps() {
-
+        stepCount++;
+        updateLvlDisplay();
+        updateStepDisplay();
+        exportData();
     }
 }
