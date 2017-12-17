@@ -25,15 +25,7 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
     int gold;
     int mood;
     int level;
-    int xp;
-    int stepCount = 0;
     static int allSteps;
-    Calendar date = Calendar.getInstance();
-    /*ImageView neutral;
-    ImageView sad;
-    ImageView happy;
-    ImageView dead;*/
-
 
     ImageView food;
     ImageButton kitty;
@@ -60,8 +52,8 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
 
     //exports data to the text file
     public void exportData() {
-        //gold-mood-level-xp
-        String data = gold + "@" + mood + "@" + level + "@" + xp + "@" + stepCount; //How data is formatted, useful for reading later
+        //gold-mood-level-steps
+        String data = gold + "@" + mood + "@" + level + "@" + allSteps; //How data is formatted, useful for reading later
         try {
             FileOutputStream fOut = openFileOutput("data.txt", Context.MODE_PRIVATE); //open stream to file "data"
             fOut.write(data.getBytes());    //write the string 'data' to data.txt (must convert string to bytes)
@@ -80,10 +72,9 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
             byte[] dataArray = new byte[fis.available()]; //creates an array that's size is the size of the data (bytes)
             if(dataArray.length == 0) { //if there is no data, we set all values to base values
                 gold = 0;
-                mood = 20;
+                mood = 50;
                 level = 0;
-                xp = 0;
-                stepCount = 0;
+                allSteps = 0;
             }
             else {
                 while(fis.read(dataArray) != -1) {
@@ -94,18 +85,16 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
                 System.out.println(collected);
                 gold = Integer.parseInt(parts[0]);
                 mood = Integer.parseInt(parts[1]);
-                level = Integer.parseInt(parts[2]);
-                xp = Integer.parseInt(parts[3]);
-                stepCount = Integer.parseInt(parts[4]);
+                level = Integer.parseInt(parts[2]); //gold-mood-level-steps
+                allSteps = Integer.parseInt(parts[3]);
             }
 
         } catch (FileNotFoundException e) { //file not found so we set base values to the instance variables
             e.printStackTrace();
             gold = 0;
-            mood = 20;
+            mood = 50;
             level = 0;
-            xp = 0;
-            stepCount = 0;
+            allSteps = 0;
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -120,6 +109,8 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         }
         System.out.println(mood);
         updateGoldDisplay();
+        updateLevelDisplay();
+        updateStepDisplay();
     }
     public void updateGoldDisplay() {
         text.setText("Gold: " + gold);
