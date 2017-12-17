@@ -15,7 +15,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/Happy"
             android:layout_width="200dp"
             android:layout_height="200dp"
@@ -26,9 +26,9 @@
             android:src="@drawable/happy"
             android:visibility="invisible"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="199dp" />
+            tools:layout_editor_absoluteY="199dp" />-->
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/Neutral"
             android:layout_width="200dp"
             android:layout_height="200dp"
@@ -38,7 +38,7 @@
             android:src="@drawable/neutral"
             android:visibility="invisible"
             tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="211dp" />
+            tools:layout_editor_absoluteY="211dp" />-->
 
         <ImageView
             android:id="@+id/food"
@@ -53,7 +53,7 @@
             tools:layout_editor_absoluteX="232dp"
             tools:layout_editor_absoluteY="258dp" />
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/Sad"
             android:layout_width="200dip"
             android:layout_height="200dip"
@@ -63,7 +63,7 @@
             android:layout_marginBottom="36dp"
             android:cropToPadding="true"
             android:src="@drawable/sad"
-            android:visibility="invisible" />
+            android:visibility="invisible" />-->
 
         <TextView
             android:id="@+id/textView2"
@@ -125,7 +125,7 @@
             android:background="@drawable/catfoodfinal"
             android:onClick="buyFood" />
 
-        <ImageView
+        <!--<ImageView
             android:id="@+id/dead"
             android:layout_width="200dp"
             android:layout_height="300dp"
@@ -136,14 +136,14 @@
             android:layout_toEndOf="@+id/textView2"
             android:layout_toRightOf="@+id/textView2"
             android:visibility="invisible"
-            app:srcCompat="@drawable/deadcat" />
+            app:srcCompat="@drawable/deadcat" />-->
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_above="@+id/progressBar"
             android:layout_alignStart="@+id/progressBar"
-            android:layout_below="@+id/Sad"
             android:text="SAD"
             android:textAppearance="@style/TextAppearance.AppCompat.Button"
             android:textColor="@android:color/background_light" />
@@ -152,10 +152,21 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/food"
-            android:layout_below="@+id/dead"
+            android:layout_above="@+id/progressBar"
+            android:layout_alignEnd="@+id/progressBar"
             android:text="HAPPY"
             android:textColor="@android:color/background_light" />
+
+        <ImageButton
+            android:id="@+id/cat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/button5"
+            android:layout_marginTop="25dp"
+            android:backgroundTint="@android:color/transparent"
+            android:onClick="pet"
+            app:srcCompat="@drawable/neutral" />
 
     </RelativeLayout>
 

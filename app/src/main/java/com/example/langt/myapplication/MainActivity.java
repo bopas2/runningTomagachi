@@ -6,6 +6,7 @@ import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -26,10 +27,11 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
     int lastDay;
     int stepCount = 0;
     Calendar date = Calendar.getInstance();
-    ImageView neutral;
+    /*ImageView neutral;
     ImageView sad;
     ImageView happy;
-    ImageView dead;
+    ImageView dead;*/
+    ImageButton kitty;
     ImageView food;
     TextView text;
     ProgressBar pp;
@@ -41,9 +43,11 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         startService(new Intent(this, YourService.class));
         text = findViewById(R.id.goldDisplay);
         startUp();
+        kitty = findViewById(R.id.cat);
         whichCat();
         updateProgress();
         food = findViewById(R.id.food);
+
 
 //        setMood();
     }
@@ -133,10 +137,13 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         }
         exportData();
     }
-//    //text = findViewById(R.id.goldDisplay);
 
     public void adjustmood(int a) {
         mood += a;
+        if(mood > 100)
+            mood = 100;
+        if(mood < 0)
+            mood = 0;
         exportData();
         whichCat();
         updateProgress();
@@ -147,18 +154,26 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         pp.setProgress(mood,true);
     }
     public void whichCat() {
-        neutral = findViewById(R.id.Neutral); neutral.setVisibility(View.INVISIBLE);
-        happy = findViewById(R.id.Happy); happy.setVisibility(View.INVISIBLE);
-        sad = findViewById(R.id.Sad); sad.setVisibility(View.INVISIBLE);
-        dead = findViewById(R.id.dead); dead.setVisibility(View.INVISIBLE);
         if(mood > 20 && mood < 80)
-            neutral.setVisibility(View.VISIBLE);
-        else if(mood >= 80)
-            happy.setVisibility(View.VISIBLE);
+            kitty.setImageResource(R.drawable.neutral);
+        else if(mood >= 80 && mood <= 100)
+            kitty.setImageResource(R.drawable.happy);
         else if (mood < 1)
-            dead.setVisibility(View.VISIBLE);
+            kitty.setImageResource(R.drawable.deadcat);
         else if(mood <= 20)
-            sad.setVisibility(View.VISIBLE);
+            kitty.setImageResource(R.drawable.sad);
+    }
+
+    public void pet(View v)
+    {
+        kitty.setImageResource(R.drawable.pet);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                whichCat();
+            }
+        }, 1000);
     }
 
     public void setMood()
@@ -176,8 +191,7 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
 
 
     @Override
-    public void goldMail()
-    {
+    public void goldMail() {
         gold++;
         exportData();
         updateGoldDisplay();
