@@ -238,4 +238,9 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         exportData();
         updateGoldDisplay();
     }
+
+    @Override
+    public void allSteps() {
+
+    }
 }
