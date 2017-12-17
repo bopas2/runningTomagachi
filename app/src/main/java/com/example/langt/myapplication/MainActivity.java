@@ -2,6 +2,8 @@ package com.example.langt.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -54,6 +57,11 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         whichCat();
         updateProgress();
         food = findViewById(R.id.food);
+        RelativeLayout layout = (RelativeLayout)findViewById(R.id.relativeLayout);
+
+        AnimationDrawable anim = (AnimationDrawable) layout.getBackground();
+        anim.start();
+        //food.setBackgroundTintList(ColorStateList.valueOf(transparent))
 
         setMood();
     }

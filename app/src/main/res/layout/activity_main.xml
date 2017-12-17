@@ -10,7 +10,7 @@
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background4"
+        android:background="@drawable/animation"
         android:fitsSystemWindows="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -158,8 +158,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/food"
-            android:layout_alignParentStart="true"
-            android:layout_marginBottom="22dp"
+            android:layout_alignStart="@+id/textView"
+            android:layout_marginBottom="17dp"
             android:backgroundTint="@android:color/transparent"
             android:onClick="pet"
             app:srcCompat="@drawable/neutral" />
