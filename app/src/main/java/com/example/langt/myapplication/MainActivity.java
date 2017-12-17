@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.AnimationDrawable;
+import android.icu.util.TimeZone;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -22,14 +24,22 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.os.Handler;
+import android.widget.ToggleButton;
 
 
 public class MainActivity extends AppCompatActivity implements GoldListener{
-    int gold;
+    int gold = 0;
     int mood;
     int level;
     int stepCount = 0;
+    int counter = 1;
+    long lastTime;
+    long currTime;
+    int dayStep = 0;
+    String data;
+    int first = 1;
     Timer ani;
+    int stepGoal;
 
     ImageView food;
     ImageButton kitty;
@@ -37,6 +47,10 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
     TextView textSteps;
     TextView textLvl;
     ProgressBar pp;
+    TextView stats;
+    ToggleButton onoff;
+    Calendar date;
+    EditText goal;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,22 +66,30 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         whichCat();
         updateProgress();
         food = findViewById(R.id.food);
-<<<<<<< HEAD
+        date = Calendar.getInstance(java.util.TimeZone.getTimeZone("America/New_York"));
+
+
         RelativeLayout layout = (RelativeLayout)findViewById(R.id.relativeLayout);
 
         AnimationDrawable anim = (AnimationDrawable) layout.getBackground();
         anim.start();
         //food.setBackgroundTintList(ColorStateList.valueOf(transparent))
 
-=======
->>>>>>> b96b4ebb08bc3ec071de2c922405f19b315e08c2
         setMood();
+        /*if(first == 1)
+        {
+            goal = findViewById(R.id.goalsetter);
+
+            goal.setVisibility(View.GONE);
+            TextView bubble = findViewById(R.id.opening);
+            bubble.setVisibility(View.GONE);
+        }*/
     }
 
     //exports data to the text file
     public void exportData() {
         //gold-mood-level-step
-        String data = gold + "@" + mood + "@" + level + "@" + stepCount; //How data is formatted, useful for reading later
+        data = gold + "@" + mood + "@" + level + "@" + stepCount + "@" + dayStep + "@" + lastTime; //How data is formatted, useful for reading later
         try {
             FileOutputStream fOut = openFileOutput("data.txt", Context.MODE_PRIVATE); //open stream to file "data"
             fOut.write(data.getBytes());    //write the string 'data' to data.txt (must convert string to bytes)
@@ -89,6 +111,9 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
                 mood = 50;
                 level = 0;
                 stepCount = 0;
+                dayStep = 0;
+                lastTime = 0;
+
             }
             else {
                 while(fis.read(dataArray) != -1) {
@@ -96,11 +121,13 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
                 }
                 //at this point collected == 'gold-mood-level-xp' format, we break it up and set our instance variables to their values
                 String[] parts = collected.split("@"); //gold-mood-level-step
-                System.out.println(collected);
+
                 gold = Integer.parseInt(parts[0]);
                 mood = Integer.parseInt(parts[1]);
                 level = Integer.parseInt(parts[2]);
                 stepCount = Integer.parseInt(parts[3]);
+                dayStep = Integer.parseInt(parts[4]);
+                lastTime = Long.parseLong(parts[5]);
             }
 
         } catch (FileNotFoundException e) { //file not found so we set base values to the instance variables
@@ -109,6 +136,8 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
             mood = 50;
             level = 0;
             stepCount = 0;
+            dayStep = 0;
+            lastTime = 0;
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -123,15 +152,17 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         }
         System.out.println(mood);
         updateGoldDisplay();
+        updateLvlDisplay();
+        updateStepDisplay();
     }
     public void updateGoldDisplay() {
-        text.setText("Gold: " + gold);
+        text.setText("G: " + gold);
     }
     public void updateStepDisplay() {
         textSteps.setText("Total Steps: " + stepCount);
     }
-    public void updateLvlDisplay() {
-        textLvl.setText("Level: " + (int)((Math.pow(stepCount,.98))/100));
+    public int updateLvlDisplay() {
+        return (int)((Math.pow(stepCount,.98))/100);
     }
     public void buyFood(View v) {
         if(gold >= 10) {
@@ -176,6 +207,28 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         whichCat();
         updateProgress();
     }
+
+    public void showStats(View v)
+    {
+        onoff = findViewById(R.id.statsButton);
+        stats = findViewById(R.id.statsWindow);
+        updateLvlDisplay();
+        stats.setText("Try to get to 10,000 steps!\nLevel: " + updateLvlDisplay() + "\nSteps today: " + dayStep + "\n Total steps walked: " + stepCount + "\nGold: " + gold + "\n\n\n\ntap to exit");
+
+
+        if(counter == 1) {
+            stats.setVisibility(View.VISIBLE);
+            counter--;
+        }
+
+        else if(counter == 0)
+        {
+            stats.setVisibility(View.GONE);
+            counter++;
+        }
+
+    }
+
     public void updateProgress() {
         pp = (ProgressBar)(findViewById(R.id.progressBar));
         pp.setScaleY(3f);
@@ -220,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
                     }
                 });
             }
-        }, 0, 1000);
+        }, 0, 10000);
     }
     @Override
     public void goldMail() {
@@ -235,6 +288,21 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         stepCount++;
         updateLvlDisplay();
         updateStepDisplay();
+        if(dayStep == 0)
+            lastTime = currTime = date.getTimeInMillis();
+        else
+        {
+            currTime = date.getTimeInMillis();
+            if(currTime < lastTime)
+                dayStep = 0;
+        }
+        dayStep++;
+        lastTime = currTime;
         exportData();
+
+        if(dayStep >= 10000)
+        {
+            gold += 100000;
+        }
     }
 }

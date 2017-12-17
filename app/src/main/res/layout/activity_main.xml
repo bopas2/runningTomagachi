@@ -44,10 +44,10 @@
             android:id="@+id/food"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_above="@+id/progressBar"
-            android:layout_alignEnd="@+id/progressBar"
-            android:layout_alignRight="@+id/progressBar"
-            android:layout_marginBottom="32dp"
+            android:layout_above="@+id/ender"
+            android:layout_alignStart="@+id/statsButton"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="38dp"
             android:src="@drawable/emptyfood"
             android:visibility="visible"
             tools:layout_editor_absoluteX="232dp"
@@ -75,7 +75,12 @@
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Level: " />
+            android:background="@android:drawable/screen_background_dark_transparent"
+            android:text="Level: "
+            android:textAllCaps="true"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="20sp"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/textView3"
@@ -84,40 +89,38 @@
             android:layout_above="@+id/button5"
             android:layout_marginStart="57dp"
             android:layout_toEndOf="@+id/textView2"
-            android:text="Total Steps:" />
+            android:text="Total Steps:"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/goldDisplay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView3"
-            android:layout_alignBottom="@+id/textView3"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginEnd="21dp"
-            android:layout_marginRight="21dp"
-            android:text="Gold:" />
+            android:layout_below="@+id/button5"
+            android:layout_marginTop="25dp"
+            android:layout_alignStart="@+id/button5"
+            android:text="G:"
+            android:visibility="visible" />
 
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/goldDisplay"
             android:layout_alignLeft="@+id/textView2"
             android:layout_alignParentBottom="true"
-            android:layout_alignRight="@+id/goldDisplay"
             android:layout_alignStart="@+id/textView2"
+            android:layout_alignEnd="@+id/ender"
             android:layout_marginBottom="10dp" />
 
         <Button
             android:id="@+id/button5"
-            android:layout_width="100dp"
-            android:layout_height="125dp"
-            android:layout_alignStart="@+id/textView2"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
             android:layout_below="@+id/textView2"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@+id/textView"
             android:background="@drawable/catfoodfinal"
             android:onClick="buyFood" />
 
@@ -157,12 +160,76 @@
             android:id="@+id/cat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+
             android:layout_alignBottom="@+id/food"
             android:layout_alignStart="@+id/textView"
-            android:layout_marginBottom="17dp"
+            android:layout_marginBottom="28dp"
             android:backgroundTint="@android:color/transparent"
             android:onClick="pet"
             app:srcCompat="@drawable/neutral" />
+
+        <ToggleButton
+            android:id="@+id/statsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textView4"
+            android:layout_alignTop="@+id/textView3"
+            android:layout_marginEnd="30dp"
+            android:elevation="50dp"
+            android:onClick="showStats"
+            android:text="ToggleButton"
+            android:textOff="Stats"
+            android:textOn="Stats" />
+
+        <TextView
+            android:id="@+id/statsWindow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/white"
+            android:editable="true"
+            android:elevation="10dp"
+            android:fontFamily="sans-serif-condensed"
+            android:gravity="center"
+            android:onClick="showStats"
+            android:text="Hello World"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/ender"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/textView4"
+            android:layout_marginEnd="15dp"
+            android:text="TextView"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/opening"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/statsButton"
+            android:layout_below="@+id/statsButton"
+            android:layout_marginTop="41dp"
+            android:background="@drawable/speech"
+            android:elevation="2dp"
+            android:gravity="center_horizontal"
+            android:text="Hello! I'm Alex!\nI'll be your walking buddy from now on\nHow many steps do you want to shoot \nfor per day?"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/goalsetter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/goldDisplay"
+            android:layout_marginEnd="26dp"
+            android:layout_marginTop="10dp"
+            android:layout_toStartOf="@+id/textView4"
+            android:elevation="3dp"
+            android:ems="10"
+            android:inputType="number"
+            android:visibility="invisible" />
 
 
     </RelativeLayout>
