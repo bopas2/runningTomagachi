@@ -291,7 +291,7 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
                     }
                 });
             }
-        }, 0, 10000);
+        }, 0, 864000);
     }
     @Override
     public void goldMail() {
@@ -315,13 +315,12 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
                 dayStep = 0;
         }
         dayStep++;
-        lastTime = currTime;
-        exportData();
+             exportData();
 
         if(dayStep == stepGoal)
         {
             gold += 100;
-            Toast.makeText(getApplicationContext(), "Goal reached! Plus 100,000 gold!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Goal reached! Plus 100 gold!", Toast.LENGTH_SHORT).show();
         }
     }
 }
