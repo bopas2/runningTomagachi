@@ -1,0 +1,21 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.langt.myapplication.StatsPage">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/statsWindow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white"
+        android:editable="true"
+        android:elevation="10dp"
+        android:fontFamily="sans-serif-condensed"
+        android:gravity="center"
+        android:text="Hello World"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+</FrameLayout>

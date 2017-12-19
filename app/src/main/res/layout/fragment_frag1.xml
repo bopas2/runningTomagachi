@@ -1,0 +1,220 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.langt.myapplication.Frag1">
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/animation"
+        android:fitsSystemWindows="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!--<ImageView
+            android:id="@+id/Happy"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_alignLeft="@+id/Sad"
+            android:layout_alignStart="@+id/Sad"
+            android:layout_alignTop="@+id/Sad"
+            android:cropToPadding="true"
+            android:src="@drawable/happy"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="199dp" />-->
+
+        <!--<ImageView
+            android:id="@+id/Neutral"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_alignLeft="@+id/Happy"
+            android:layout_alignStart="@+id/Happy"
+            android:layout_alignTop="@+id/Happy"
+            android:src="@drawable/neutral"
+            android:visibility="invisible"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="211dp" />-->
+
+        <ImageView
+            android:id="@+id/food"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_above="@+id/ender"
+            android:layout_alignStart="@+id/statsButton"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="38dp"
+            android:src="@drawable/emptyfood"
+            android:visibility="visible"
+            tools:layout_editor_absoluteX="232dp"
+            tools:layout_editor_absoluteY="258dp" />
+
+        <!--<ImageView
+            android:id="@+id/Sad"
+            android:layout_width="200dip"
+            android:layout_height="200dip"
+            android:layout_alignBottom="@+id/food"
+            android:layout_alignLeft="@+id/progressBar"
+            android:layout_alignStart="@+id/progressBar"
+            android:layout_marginBottom="36dp"
+            android:cropToPadding="true"
+            android:src="@drawable/sad"
+            android:visibility="invisible" />-->
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:drawable/screen_background_dark_transparent"
+            android:text="Level: "
+            android:textAllCaps="true"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="20sp"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/button5"
+            android:layout_marginStart="57dp"
+            android:layout_toEndOf="@+id/textView2"
+            android:text="Total Steps:"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/goldDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button5"
+            android:layout_marginTop="25dp"
+            android:layout_alignStart="@+id/button5"
+            android:text="G:"
+            android:visibility="visible" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/ender"
+            android:layout_alignLeft="@+id/textView2"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/textView2"
+            android:layout_marginBottom="10dp"
+            android:visibility="visible"
+            tools:visibility="visible" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="75dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/textView2"
+            android:layout_marginStart="9dp"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@+id/textView"
+            android:background="@drawable/catfoodfinal" />
+
+        <!--<ImageView
+            android:id="@+id/dead"
+            android:layout_width="200dp"
+            android:layout_height="300dp"
+            android:layout_alignBottom="@+id/food"
+            android:layout_marginBottom="25dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@+id/textView2"
+            android:layout_toRightOf="@+id/textView2"
+            android:visibility="invisible"
+            app:srcCompat="@drawable/deadcat" />-->
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/progressBar"
+            android:layout_alignStart="@+id/progressBar"
+            android:text="SAD"
+            android:textAppearance="@style/TextAppearance.AppCompat.Button"
+            android:textColor="@android:color/background_light" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/progressBar"
+            android:layout_alignEnd="@+id/progressBar"
+            android:text="HAPPY"
+            android:textColor="@android:color/background_light" />
+
+        <ImageButton
+            android:id="@+id/cat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/food"
+            android:layout_alignStart="@+id/textView"
+            android:layout_marginBottom="28dp"
+            android:backgroundTint="@android:color/transparent"
+            app:srcCompat="@drawable/neutral" />
+
+        <ToggleButton
+            android:id="@+id/statsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textView4"
+            android:layout_alignTop="@+id/textView3"
+            android:layout_marginEnd="30dp"
+            android:elevation="50dp"
+            android:onClick="showStats"
+            android:text="ToggleButton"
+            android:textOff="Stats"
+            android:textOn="Stats" />
+
+        <TextView
+            android:id="@+id/ender"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/textView4"
+            android:layout_marginEnd="15dp"
+            android:text="TextView"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/opening"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/statsButton"
+            android:layout_below="@+id/statsButton"
+            android:layout_marginTop="41dp"
+            android:background="@drawable/speech"
+            android:elevation="2dp"
+            android:gravity="center_horizontal"
+            android:text="Hello! I'm Alex!\nI'll be your walking buddy from now on\nHow many steps do you want to shoot \nfor per day?"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/goalsetter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/goldDisplay"
+            android:layout_marginStart="25dp"
+            android:layout_alignStart="@+id/opening"
+            android:layout_toEndOf="@+id/goldDisplay"
+            android:elevation="3dp"
+            android:ems="10"
+            android:inputType="number"
+            android:visibility="invisible" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>
