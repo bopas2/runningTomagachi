@@ -80,7 +80,23 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
                 if (i == EditorInfo.IME_ACTION_DONE){
                     stepGoal = Integer.parseInt(textView.getText().toString());
                     goal.setVisibility(View.GONE);
+                    bubble.setTextSize(20);
+                    bubble.setText("\n\nTap the food bag to feed me!");
+                    if(gold == 0) {
+                        bubble.setText("\nYum!\nThanks!");
+                        try {
+                            Thread.sleep(5000);
+                        } catch (Exception e) {
+                        }
+                        bubble.setText("\nDid you notice your gold went down?\nIt costs 10 gold to feed me,\nwalk to earn more gold to keep me full and happy!");
+                        bubble.setText("\nYum!\nThanks!");
+                        try {
+                            Thread.sleep(5000);
+                        } catch (Exception e) {
+                        }
+                    }
                     bubble.setVisibility(View.GONE);
+
                 }
                 return false;
             }
@@ -124,8 +140,8 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
             fis = openFileInput("data.txt"); //instantiate the stream that lets us read the file
             byte[] dataArray = new byte[fis.available()]; //creates an array that's size is the size of the data (bytes)
             if(dataArray.length == 0) { //if there is no data, we set all values to base values
-                gold = 0;
-                mood = 50;
+                gold = 10;
+                mood = 70;
                 level = 0;
                 stepCount = 0;
                 dayStep = 0;
@@ -150,8 +166,8 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
 
         } catch (FileNotFoundException e) { //file not found so we set base values to the instance variables
             e.printStackTrace();
-            gold = 0;
-            mood = 50;
+            gold = 10;
+            mood = 70;
             level = 0;
             stepCount = 0;
             dayStep = 0;
@@ -185,9 +201,11 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
     public void buyFood(View v) {
         if(gold >= 10) {
             gold -= 10;
+            exportData();
             updateGoldDisplay();
             food.setImageResource(R.drawable.bowl);
             food.setVisibility(View.VISIBLE);
+            adjustmood(10);
             ani.schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -210,9 +228,7 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
                     });
                 }
             }, 2000);
-            adjustmood(5);
         }
-        exportData();
     }
 
     public void adjustmood(int a) {
