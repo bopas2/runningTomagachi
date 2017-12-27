@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
     int first = 1;
     Timer ani;
     int stepGoal = 10000;
-
     ImageView food;
     ImageButton kitty;
     TextView text;
@@ -57,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
     ToggleButton onoff;
     Calendar date;
     EditText goal;
+    Boolean tutorial = true;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,24 +79,10 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if (i == EditorInfo.IME_ACTION_DONE){
                     stepGoal = Integer.parseInt(textView.getText().toString());
-                    goal.setVisibility(View.GONE);
+                    goal.setVisibility(View.INVISIBLE);
                     bubble.setTextSize(20);
+                    gold = 10;
                     bubble.setText("\n\nTap the food bag to feed me!");
-                    if(gold == 0) {
-                        bubble.setText("\nYum!\nThanks!");
-                        try {
-                            Thread.sleep(5000);
-                        } catch (Exception e) {
-                        }
-                        bubble.setText("\nDid you notice your gold went down?\nIt costs 10 gold to feed me,\nwalk to earn more gold to keep me full and happy!");
-                        bubble.setText("\nYum!\nThanks!");
-                        try {
-                            Thread.sleep(5000);
-                        } catch (Exception e) {
-                        }
-                    }
-                    bubble.setVisibility(View.GONE);
-
                 }
                 return false;
             }
@@ -188,6 +174,7 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         updateGoldDisplay();
         updateLvlDisplay();
         updateStepDisplay();
+
     }
     public void updateGoldDisplay() {
         text.setText("Gold: " + gold);
@@ -199,35 +186,64 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         return (int)((Math.pow(stepCount,.98))/100);
     }
     public void buyFood(View v) {
-        if(gold >= 10) {
-            gold -= 10;
-            exportData();
-            updateGoldDisplay();
-            food.setImageResource(R.drawable.bowl);
-            food.setVisibility(View.VISIBLE);
-            adjustmood(10);
+        if(tutorial) {
+            bubble.setText("\nYum!\nThanks!");
             ani.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            food.setImageResource(R.drawable.halffood);
+                            bubble.setText("\nDid you notice your gold went down?\nIt costs 10 gold to feed me,\nwalk to earn more gold to keep me full and happy!");
                         }
                     });
-                }
-            }, 1000);
-            ani.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            food.setImageResource(R.drawable.emptyfood);
-                        }
-                    });
+                    //bubble.setText("\nYum!\nThanks!");
                 }
             }, 2000);
+            ani.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            bubble.setVisibility(View.GONE);
+                        }
+                    });
+                }
+            }, 4000);
+            tutorial = false;
+        }
+        else {
+            if (gold >= 10) {
+                gold -= 10;
+                exportData();
+                updateGoldDisplay();
+                food.setImageResource(R.drawable.bowl);
+                food.setVisibility(View.VISIBLE);
+                adjustmood(10);
+                ani.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                food.setImageResource(R.drawable.halffood);
+                            }
+                        });
+                    }
+                }, 1000);
+                ani.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                food.setImageResource(R.drawable.emptyfood);
+                            }
+                        });
+                    }
+                }, 2000);
+            }
         }
     }
 

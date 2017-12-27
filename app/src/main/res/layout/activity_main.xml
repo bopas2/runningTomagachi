@@ -221,17 +221,17 @@
             android:id="@+id/goalsetter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="75dp"
-            android:layout_alignTop="@+id/opening"
-            android:layout_marginStart="25dp"
-            android:layout_alignStart="@+id/opening"
-            android:layout_marginEnd="25dp"
             android:layout_alignEnd="@+id/opening"
+            android:layout_alignStart="@+id/opening"
+            android:layout_alignTop="@+id/opening"
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="75dp"
             android:layout_toEndOf="@+id/goldDisplay"
             android:elevation="3dp"
             android:ems="10"
             android:inputType="number"
-            android:visibility="invisible" />
+            android:visibility="visible" />
 
 
     </RelativeLayout>
