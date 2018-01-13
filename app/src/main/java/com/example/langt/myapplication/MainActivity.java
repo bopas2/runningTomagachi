@@ -126,13 +126,7 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
             fis = openFileInput("data.txt"); //instantiate the stream that lets us read the file
             byte[] dataArray = new byte[fis.available()]; //creates an array that's size is the size of the data (bytes)
             if(dataArray.length == 0) { //if there is no data, we set all values to base values
-                gold = 10;
-                mood = 70;
-                level = 0;
-                stepCount = 0;
-                dayStep = 0;
-                lastTime = 0;
-                first = 1;
+                init();
             }
             else {
                 while(fis.read(dataArray) != -1) {
@@ -140,24 +134,22 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
                 }
                 //at this point collected == 'gold-mood-level-xp' format, we break it up and set our instance variables to their values
                 String[] parts = collected.split("@"); //gold-mood-level-step
-
-                gold = Integer.parseInt(parts[0]);
-                mood = Integer.parseInt(parts[1]);
-                level = Integer.parseInt(parts[2]);
-                stepCount = Integer.parseInt(parts[3]);
-                dayStep = Integer.parseInt(parts[4]);
-                lastTime = Long.parseLong(parts[5]);
-                first = Integer.parseInt(parts[6]);
+                try {
+                    gold = Integer.parseInt(parts[0]);
+                    mood = Integer.parseInt(parts[1]);
+                    level = Integer.parseInt(parts[2]);
+                    stepCount = Integer.parseInt(parts[3]);
+                    dayStep = Integer.parseInt(parts[4]);
+                    lastTime = Long.parseLong(parts[5]);
+                    first = Integer.parseInt(parts[6]);
+                } catch(Exception e){
+                    init();
+                }
             }
 
         } catch (FileNotFoundException e) { //file not found so we set base values to the instance variables
             e.printStackTrace();
-            gold = 10;
-            mood = 70;
-            level = 0;
-            stepCount = 0;
-            dayStep = 0;
-            lastTime = 0;
+            init();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -175,6 +167,15 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
         updateLvlDisplay();
         updateStepDisplay();
 
+    }
+    public void init(){
+        gold = 10;
+        mood = 70;
+        level = 0;
+        stepCount = 0;
+        dayStep = 0;
+        lastTime = 0;
+        first = 1;
     }
     public void updateGoldDisplay() {
         text.setText("Gold: " + gold);
