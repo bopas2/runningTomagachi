@@ -298,14 +298,16 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
 
     public void pet(View v)
     {
-        kitty.setImageResource(R.drawable.pet);
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                whichCat();
-            }
-        }, 1000);
+        if (mood >= 1) {
+            kitty.setImageResource(R.drawable.pet);
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    whichCat();
+                }
+            }, 1000);
+        }
     }
 
     public void setMood()
@@ -324,7 +326,7 @@ public class MainActivity extends AppCompatActivity implements GoldListener{
                     }
                 });
             }
-        }, 0, 864000);
+        }, 0, 1000);
     }
     @Override
     public void goldMail() {

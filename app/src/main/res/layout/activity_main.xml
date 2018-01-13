@@ -160,10 +160,9 @@
             android:id="@+id/cat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:layout_alignBottom="@+id/food"
             android:layout_alignStart="@+id/textView"
-            android:layout_marginBottom="28dp"
+            android:layout_marginBottom="10dp"
             android:backgroundTint="@android:color/transparent"
             android:onClick="pet"
             app:srcCompat="@drawable/neutral" />
@@ -214,8 +213,8 @@
             android:background="@drawable/speech"
             android:elevation="2dp"
             android:gravity="center_horizontal"
-            android:text="Hello! I'm Alex!\nI'll be your walking buddy from now on\nHow many steps do you want to shoot \nfor per day?"
-            android:visibility="visible" />
+            android:text="Hello! I'm Alex!\nI'll be your walking buddy from now on\nHow many steps do you want to shoot \n per day?"
+            android:visibility="invisible" />
 
         <EditText
             android:id="@+id/goalsetter"
@@ -231,7 +230,7 @@
             android:elevation="3dp"
             android:ems="10"
             android:inputType="number"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
 
     </RelativeLayout>
